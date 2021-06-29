@@ -1,5 +1,5 @@
 import axios from "axios";
-const domain = 'https://piggybankserver.herokuapp.com';
+const domain = 'http://localhost:3001';
 
 
 export async function validateSession_id() {
@@ -59,7 +59,7 @@ export async function editMoney(money){
 
 export async function editAllowance(allowance){
     const session_id = document.cookie.split('=')[1];
-    await axios.post("https://piggybankserver.herokuapp.com/editAllowance", {
+    await axios.post(`${domain}/editAllowance`, {
         "session_id" : session_id,
         "allowance" : allowance
     });

@@ -79,7 +79,7 @@ function Login() {
   const handleLogin = () => {
     console.log(email, password);
     axios
-      .post(`https://piggybankserver.herokuapp.com/login`, { email: email, password: password }) //this link needs to be changed
+      .post(`http://localhost:3001/login`, { email: email, password: password }) //this link needs to be changed
       .then((res) => {
         document.cookie = "session_id=" + res.data.session_id;
         window.location.replace("/dashboard");
