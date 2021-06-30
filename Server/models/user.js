@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema({
   allowance: {
     type: Number,
     default: 0
+  },
+  interest: {
+    type: Number,
+    default: 0.03
   }
 });
 

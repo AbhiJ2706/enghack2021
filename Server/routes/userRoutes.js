@@ -1,5 +1,6 @@
 const express = require("express");
 const userModel = require("../models/user.js");
+const cron = require('node-cron');
 const app = express();
 
 
@@ -11,7 +12,8 @@ app.post("/validateSession_id",  async(req,res) => {
         }else{
             res.status(200).send(
                 {"username" : users[0].username, "money" : users[0].money, 
-                "email" : users[0].email, "allowance" : users[0].allowance}
+                "email" : users[0].email, "allowance" : users[0].allowance,
+                "interest" : users[0].interest}
             );
         }
     }catch(err){
@@ -102,6 +104,18 @@ app.post("/editAllowance", async (req, res) => {
     }
 });
 
+app.post("/editInterest", async (req, res) => {
+    console.log(req.body)
+    try{
+        userModel.findOneAndUpdate({"session_id" : req.body.session_id}, {"interest" : req.body.interest}, function(err, doc) {
+            if (err) res.status(200).send({"error" : "Upload error"});
+            res.status(200).send("OK")
+        }); 
+    }catch(err){
+        res.status(200).send({"error" : "Internal error"});
+    }
+});
+
 app.get("/getAllUsers", async (req, res) => {
     try {
         const users = await userModel.find();
@@ -110,5 +124,27 @@ app.get("/getAllUsers", async (req, res) => {
         res.status(200).send({"error" : "Internal error"});
     }
 });
+
+app.get("/forceUpdate", async (req, res) => {
+    userModel.find({}, function(err, users) {
+        users.forEach(function(user) {
+          user.updateOne({"money": (user.money + user.allowance) * (1 + user.interest)}, function (err, doc) {
+          })
+        });
+    });
+    res.redirect("http://localhost:3001/getAllUsers")
+})
+
+
+cron.schedule('0 0 1 * *', () => {
+    console.log('running a task every month');
+    userModel.find({}, function(err, users) {
+        users.forEach(function(user) {
+            user.updateOne({"money": (user.money + user.allowance) * (1 + user.interest)}, function (err, doc) {})
+        });
+    });
+});
+  
+
 
 module.exports = app;

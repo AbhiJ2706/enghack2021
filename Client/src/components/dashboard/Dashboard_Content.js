@@ -97,7 +97,13 @@ export default function Dashboard_Content() {
   const [money, setMoney] = useState(0)
   const [email, setEmail] = useState("")
   const [allowance, setAllowance] = useState(0)
-  validateSession_id().then((r) => {setUsername(r.username); setMoney(r.money); setEmail(r.email); setAllowance(r.allowance); console.log("the final values are", username, email, money)})
+  const [interest, setInterest] = useState(0);
+  validateSession_id().then((r) => {setInterest(r.interest); 
+                                    setUsername(r.username); 
+                                    setMoney(r.money); 
+                                    setEmail(r.email); 
+                                    setAllowance(r.allowance);  
+                                    console.log("the final values are", username, email, money, interest)})
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -116,7 +122,7 @@ export default function Dashboard_Content() {
       </Grid>
       <Grid item xs={12} md={4} lg={3}>
         <Paper className={fixedHeightPaper}>
-          <Interest interest={0.02 * money}/>
+          <Interest interest={interest}/>
         </Paper>
       </Grid>
       <Grid item xs={12}>

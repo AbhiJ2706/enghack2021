@@ -16,7 +16,7 @@ export async function validateSession_id() {
 
     if (loggedIn) {
         console.log("validation brought us here")
-        return {username: res.data.username, money: res.data.money, email: res.data.email, allowance: res.data.allowance}
+        return {username: res.data.username, money: res.data.money, email: res.data.email, allowance: res.data.allowance, interest: res.data.interest}
     } else {
         const path = window.location.pathname;
         if(path !== "/" && path !== "/login" && path !== "/signup"){
@@ -62,6 +62,15 @@ export async function editAllowance(allowance){
     await axios.post(`${domain}/editAllowance`, {
         "session_id" : session_id,
         "allowance" : allowance
+    });
+    window.location.replace("/dashboard")
+}
+
+export async function editInterest(interest){
+    const session_id = document.cookie.split('=')[1];
+    await axios.post(`${domain}/editInterest`, {
+        "session_id" : session_id,
+        "interest" : interest
     });
     window.location.replace("/dashboard")
 }

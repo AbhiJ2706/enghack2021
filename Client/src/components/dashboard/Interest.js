@@ -9,8 +9,11 @@ const useStyles = makeStyles({
   },
 });
 
-const interest = 1.23;
-const date = "June 27, 2021";
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+const date = mm + '/' + dd + '/' + yyyy;
 
 function Interest(props) {
   const classes = useStyles();
@@ -20,7 +23,7 @@ function Interest(props) {
       <br />
       <div>
         <Typography component="span" variant="h3">
-          {"$" + props.interest.toFixed(2)}
+          {(props.interest * 100).toFixed(2) + "%"}
         </Typography>
         <span>/month</span>
       </div>
