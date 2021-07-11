@@ -27,6 +27,18 @@ export async function validateSession_id() {
 }
 
 
+export async function validatePassword(email, password) {
+    const res = await axios.post(`${domain}/login`,{
+        "email" : email,
+        'password': password
+    })
+
+    const loggedIn = typeof res.data.error === 'undefined';
+    console.log(loggedIn)
+    return loggedIn
+}
+
+
 export async function getAmazonData() {
     const res = await axios.get(`${domain}/getData`, {})
     console.log(res.data)
@@ -48,30 +60,45 @@ export async function purchaseProduct(name,price,image,link,asin,email){
     })   
 }
 
-export async function editMoney(money){
-    const session_id = document.cookie.split('=')[1];
-    await axios.post(`${domain}/editMoney`, {
-        "session_id" : session_id,
-        "money" : money
-    });
-    window.location.replace("/dashboard")
+export async function editMoney(money, email, pw){
+    validatePassword(email, pw).then((r) => {
+        if (r) {
+            const session_id = document.cookie.split('=')[1];
+            axios.post(`${domain}/editMoney`, {
+                "session_id" : session_id,
+                "money" : money
+            }).then(() => window.location.replace("/dashboard"))
+        } else {
+            return false;
+        }
+    })
 }
 
-export async function editAllowance(allowance){
-    const session_id = document.cookie.split('=')[1];
-    await axios.post(`${domain}/editAllowance`, {
-        "session_id" : session_id,
-        "allowance" : allowance
-    });
-    window.location.replace("/dashboard")
+export async function editAllowance(allowance, email, pw){
+    validatePassword(email, pw).then((r) => {
+        if (r) {
+            const session_id = document.cookie.split('=')[1];
+            axios.post(`${domain}/editAllowance`, {
+                "session_id" : session_id,
+                "allowance" : allowance
+            }).then(() => window.location.replace("/dashboard"))
+        } else {
+            return false;
+        }
+    })
 }
 
-export async function editInterest(interest){
-    const session_id = document.cookie.split('=')[1];
-    await axios.post(`${domain}/editInterest`, {
-        "session_id" : session_id,
-        "interest" : interest
-    });
-    window.location.replace("/dashboard")
+export async function editInterest(interest, email, pw){
+    validatePassword(email, pw).then((r) => {
+        if (r) {
+            const session_id = document.cookie.split('=')[1];
+            axios.post(`${domain}/editInterest`, {
+                "session_id" : session_id,
+                "interest" : interest
+            }).then(() => window.location.replace("/dashboard"))
+        } else {
+            return false;
+        }
+    })
 }
 

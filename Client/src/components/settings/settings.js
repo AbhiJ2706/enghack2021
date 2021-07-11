@@ -5,29 +5,116 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import {editMoney, editAllowance, editInterest} from "../../requests"
+import SimpleBackdrop from "./passwordCard";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { Backdrop } from "@material-ui/core";
+import { useState, useEffect } from "react";
+import { validateSession_id } from "../../requests";
+import Alert from "@material-ui/lab/Alert"
+
+
+
+const useStyles = makeStyles(theme => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+    width: "100%",
+    height: "100%"
+  }
+}));
+
 
 function Settings() {
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  validateSession_id().then((r) => {setUsername(r.username); setEmail(r.email); console.log("the final values are", username, email, money)})
+
   const [money, setMoney] = React.useState(0);
   const [allowance, setAllowance] = React.useState(0);
   const [interest, setInterest] = React.useState(0);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [param, setParam] = React.useState(0)
+  const [pw, setPw] = React.useState(0)
+  const [pwError, setPwError] = React.useState(false)
 
   const handleAddMoney = async () => {
-    editMoney(money)
+    setParam(0);
+    setOpen(!open);
   }
   const handleAllowance = async () => {
-    editAllowance(allowance)
+    setParam(1);
+    setOpen(!open);
   }
   const handleInterest = async () => {
+    setParam(2);
     if (interest >= 0 && interest <= 1) {
-      editInterest(interest)
+      setOpen(!open);
     } else {
       alert("Interest must be between 0 and 1")
     }
   }
 
-
   return (
     <React.Fragment>
+      <Backdrop
+        className={classes.backdrop}
+        open={open}
+        onClick={() => {
+          //setOpen(false);
+        }}
+      >
+        <div style={{right: 8, bottom: 8, float: "right"}}>
+          <Card className={classes.card}>
+              <CardContent>
+                  <Typography className={classes.title} color="textSecondary" gutterBottom>
+                      Enter Password to continue
+                  </Typography>
+                  <TextField 
+                    required
+                    variant="outlined"
+                    type="password"
+                    onChange={(e) => setPw(e.target.value)}
+                  />
+              </CardContent>
+              <CardActions>
+                <Button size="small" 
+                        onClick={async () => {
+                          if (param == 0) {
+                            var res = editMoney(money, email, pw)
+                            if (res) {
+                              setPwError(true)
+                            }
+                          } else if (param == 1) {
+                            var res = editAllowance(allowance, email, pw)
+                            if (res) {
+                              setPwError(true)
+                            }
+                          } else if (param == 2) {
+                            var res = editInterest(interest, email, pw)
+                            if (res) {
+                              setPwError(true)
+                            }
+                          }
+                        }}
+                >
+                  Enter
+                </Button>
+                <Button size="small" onClick={() => setOpen(false)}>Cancel</Button>
+              </CardActions>
+          </Card>
+          <Alert 
+              severity="error" 
+              variant="filled" 
+              style={{ right: "8", bottom: "8", float: "right", width: "100%", visibility: pwError ? "visible" : "hidden" }} 
+              onClose={() => {setPwError(false)}}>
+                Incorrect Password
+          </Alert>
+        </div>
+      </Backdrop>
       <Typography variant="h6" gutterBottom>
         Add money
       </Typography>
@@ -79,18 +166,18 @@ function Settings() {
       <br />
       <br />
       <Typography variant="h6" gutterBottom>
-        Set allowance per month
+        Set Interest per month
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
             id="set-interest"
             name="set-interest"
-            label="Between 0 and 1"
+            label="Between 0 and 100"
             fullWidth
             autoComplete="0"
             type="number"
-            onChange={(e) => setInterest(e.target.value)}
+            onChange={(e) => setInterest(e.target.value / 100)}
           />
         </Grid>
       </Grid>
