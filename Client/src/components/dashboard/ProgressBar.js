@@ -30,6 +30,12 @@ function scaleProgress(progressToScale) {
   return (100 * progressToScale) / achievementsCap;
 }
 
+function range(a, b, c) {
+  if (c >= a && c < b) {
+    
+  }
+}
+
 function ProgressBar(props) {
   const classes = useStyles();
   const achievementsProgress = props.progress < 200 ? props.progress : 200;

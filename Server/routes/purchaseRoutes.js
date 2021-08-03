@@ -6,65 +6,79 @@ const app = express();
 
 
 app.post("/purchaseProduct", async (req, res) => {
-    try {
-        console.log(req.body)
-        const purchase = new purchaseModel(req.body.params);
+  try {
+    console.log(req.body)
+    const purchase = new purchaseModel(req.body.params);
 
-        console.log(purchase)
+    console.log(purchase)
 
-        purchase.save((err) => {
-            if (err) res.status(200).send({"error" : "Upload error"}); 
-            else {
-                sendMail(req.body.params)
-                res.status(200).send("OK");
-            } 
-        });
+    purchase.save((err) => {
+      if (err) res.status(200).send({
+        "error": "Upload error"
+      });
+      else {
+        sendMail(req.body.params)
+        res.status(200).send("OK");
+      }
+    });
 
-    } catch (err) {
-        res.status(200).send({"error" : "Internal error"});
-    }
+  } catch (err) {
+    res.status(200).send({
+      "error": "Internal error"
+    });
+  }
 });
 
 app.get("/parentResponse", async (req, res) => {
-    let sentRes = false;
-    console.log(req.query)
-    try {
-        const purchases = await purchaseModel.find({email : req.query.email});
-        console.log(typeof purchases, Object.keys(purchases), purchases[0], purchases.length)
-        for (var purchase of purchases) {
-            console.log(purchase._id, purchase.ASIN, req.query.ASIN)
-            if (req.query.response == "Accept" && !sentRes && purchase.ASIN == req.query.ASIN){
-                sentRes = true;
-                purchaseModel.deleteOne({"_id" : purchase._id}, (err)=>{
-                    if(err) console.log(err);
-                    console.log("Deleted")
-                    res.redirect(`http://localhost:3001/editMoneyRedirect?email=${req.query.email}&ASIN=${req.query.ASIN}&money=${purchase.price}`)
-                });
-                break;
-            } else if (purchase.ASIN == req.query.ASIN) {
-                purchaseModel.deleteOne({"_id" : purchase._id}, (err)=>{
-                    if(err) console.log(err);
-                    console.log("Deleted")
-                });
-                break
-            }
-        }  
-
-        if(!sentRes){
-            res.status(200).send("OK : Denied Purchase")
-        }
-    } catch (err) {
-        res.status(200).send({"error" : "Internal error"});
+  let sentRes = false;
+  console.log(req.query)
+  try {
+    const purchases = await purchaseModel.find({
+      email: req.query.email
+    });
+    console.log(typeof purchases, Object.keys(purchases), purchases[0], purchases.length)
+    for (var purchase of purchases) {
+      console.log(purchase._id, purchase.ASIN, req.query.ASIN)
+      if (req.query.response == "Accept" && !sentRes && purchase.ASIN == req.query.ASIN) {
+        sentRes = true;
+        purchaseModel.deleteOne({
+          "_id": purchase._id
+        }, (err) => {
+          if (err) console.log(err);
+          console.log("Deleted")
+          res.redirect(`http://localhost:3001/editMoneyRedirect?email=${req.query.email}&ASIN=${req.query.ASIN}&money=${purchase.price}`)
+        });
+        break;
+      } else if (purchase.ASIN == req.query.ASIN) {
+        purchaseModel.deleteOne({
+          "_id": purchase._id
+        }, (err) => {
+          if (err) console.log(err);
+          console.log("Deleted")
+        });
+        break
+      }
     }
+
+    if (!sentRes) {
+      res.status(200).send("OK : Denied Purchase")
+    }
+  } catch (err) {
+    res.status(200).send({
+      "error": "Internal error"
+    });
+  }
 });
 
 app.get("/getAllPurchases", async (req, res) => {
-    try {
-        const purchases = await purchaseModel.find();
-        res.status(200).send(purchases)
-    } catch (err) {
-        res.status(200).send({"error" : "Internal error"});
-    }
+  try {
+    const purchases = await purchaseModel.find();
+    res.status(200).send(purchases)
+  } catch (err) {
+    res.status(200).send({
+      "error": "Internal error"
+    });
+  }
 });
 
 
@@ -81,13 +95,19 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-const sendMail = async({name,price,image,link,ASIN,email}) => {
+const sendMail = async ({
+  name,
+  price,
+  image,
+  link,
+  ASIN,
+  email
+}) => {
   var mailOptions = {
-      from: 'mailmailer9000@gmail.com',
-      to: email,
-      subject: `Confirm your child's purchase`,
-      html: 
-      `
+    from: 'mailmailer9000@gmail.com',
+    to: email,
+    subject: `Confirm your child's purchase`,
+    html: `
       <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
@@ -559,19 +579,15 @@ const sendMail = async({name,price,image,link,ASIN,email}) => {
       </html>
       
       `
-    };
-    
-    return new Promise((res,rej) => {
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                rej(error)
-            } else {
-                res(info.response)
-            }
-        });    
+  };
+
+  return new Promise((res, rej) => {
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        rej(error)
+      } else {
+        res(info.response)
+      }
     });
+  });
 }
-
-
-
-
