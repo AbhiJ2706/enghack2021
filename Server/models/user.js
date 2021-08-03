@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const {
-  v4: uuidv4
-} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -16,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true,
+    unique : true, 
     dropDups: true,
     validate(val) {
       if (!val.includes("@") || !val.includes(".") || val.length < 5) throw new Error("Email incorrect");
@@ -30,13 +28,13 @@ const UserSchema = new mongoose.Schema({
       if (val.length < 6) throw new Error("Password too short");
     },
   },
-  session_id: {
+  session_id:{
     type: String,
-    unique: true,
+    unique : true, 
     dropDups: true,
     default: uuidv4
   },
-  money: {
+  money:{
     type: Number,
     default: 0
   },
@@ -51,3 +49,4 @@ const UserSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("User", UserSchema);
+

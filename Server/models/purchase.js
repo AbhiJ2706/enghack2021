@@ -6,7 +6,7 @@ const PurchaseSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  price: {
+  price:{
     type: Number,
     required: true,
   },
@@ -24,10 +24,11 @@ const PurchaseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
+  email:{
     type: String,
     required: true,
   },
 });
 
 module.exports = mongoose.model("Purchase", PurchaseSchema);
+
