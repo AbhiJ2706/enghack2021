@@ -98,11 +98,13 @@ export default function Dashboard_Content() {
   const [email, setEmail] = useState("")
   const [allowance, setAllowance] = useState(0)
   const [interest, setInterest] = useState(0);
+  const [date, setDate] = useState("")
   validateSession_id().then((r) => {setInterest(r.interest); 
                                     setUsername(r.username); 
                                     setMoney(r.money); 
                                     setEmail(r.email); 
-                                    setAllowance(r.allowance);  
+                                    setAllowance(r.allowance);
+                                    setDate(r.date)  
                                     console.log("the final values are", username, email, money, interest)})
 
   const classes = useStyles();

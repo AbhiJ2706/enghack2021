@@ -20,8 +20,17 @@ export default function Marketplace() {
   const [username, setUsername] = useState("")
   const [money, setMoney] = useState(0)
   const [email, setEmail] = useState("")
-  validateSession_id().then((r) => {setUsername(r.username); setMoney(r.money); setEmail(r.email); console.log("the final values are", username, email, money)})
-
+  const [allowance, setAllowance] = useState(0)
+  const [interest, setInterest] = useState(0);
+  const [date, setDate] = useState("")
+  validateSession_id().then((r) => {setInterest(r.interest); 
+                                    setUsername(r.username); 
+                                    setMoney(r.money); 
+                                    setEmail(r.email); 
+                                    setAllowance(r.allowance);
+                                    setDate(r.date)  
+                                    console.log("the final values are", username, email, money, interest)})
+  
   // initial use state submenu selected is "featured". setSelected is used to determine the page to take the user to, when selected
   const [selected, setSelected] = useState("featured");
 

@@ -69,6 +69,7 @@ export default function SignUp() {
           username: username,
           email: email,
           password: password,
+          startDate: (new Date()).now()
         })
         .then((res) => {
           document.cookie = "session_id=" + res.data.session_id;

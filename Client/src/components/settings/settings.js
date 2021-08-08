@@ -30,8 +30,7 @@ const useStyles = makeStyles(theme => ({
 function Settings() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  validateSession_id().then((r) => {setUsername(r.username); setEmail(r.email); console.log("the final values are", username, email, money)})
-
+  const [date, setDate] = useState("")
   const [money, setMoney] = React.useState(0);
   const [allowance, setAllowance] = React.useState(0);
   const [interest, setInterest] = React.useState(0);
@@ -40,6 +39,14 @@ function Settings() {
   const [param, setParam] = React.useState(0)
   const [pw, setPw] = React.useState(0)
   const [pwError, setPwError] = React.useState(false)
+
+  validateSession_id().then((r) => {setInterest(r.interest); 
+                                    setUsername(r.username); 
+                                    setMoney(r.money); 
+                                    setEmail(r.email); 
+                                    setAllowance(r.allowance);
+                                    setDate(r.date)  
+                                    console.log("the final values are", username, email, money, interest)})
 
   const handleAddMoney = async () => {
     setParam(0);

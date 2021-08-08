@@ -45,6 +45,10 @@ const UserSchema = new mongoose.Schema({
   interest: {
     type: Number,
     default: 0.03
+  },
+  startDate: {
+    type: Number,
+    default: (new Date()).now()
   }
 });
 

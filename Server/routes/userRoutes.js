@@ -13,7 +13,8 @@ app.post("/validateSession_id",  async(req,res) => {
             res.status(200).send(
                 {"username" : users[0].username, "money" : users[0].money, 
                 "email" : users[0].email, "allowance" : users[0].allowance,
-                "interest" : users[0].interest}
+                "interest" : users[0].interest,
+                "startDate" : users[0].startDate}
             );
         }
     }catch(err){

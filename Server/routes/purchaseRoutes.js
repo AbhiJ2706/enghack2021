@@ -35,6 +35,7 @@ app.get("/parentResponse", async (req, res) => {
             console.log(purchase._id, purchase.ASIN, req.query.ASIN)
             if (req.query.response == "Accept" && !sentRes && purchase.ASIN == req.query.ASIN){
                 sentRes = true;
+                userModel.findOneAndUpdate({email : req.query.email}, {startDate : (new Date()).now()})
                 purchaseModel.deleteOne({"_id" : purchase._id}, (err)=>{
                     if(err) console.log(err);
                     console.log("Deleted")

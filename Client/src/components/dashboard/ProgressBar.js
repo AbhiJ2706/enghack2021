@@ -30,20 +30,33 @@ function scaleProgress(progressToScale) {
   return (100 * progressToScale) / achievementsCap;
 }
 
+
+function range(a, b, c) {
+  if (c >= a && c < b) {
+    return c
+  }
+}
+
+
+const intervals = [0, 10, 25, 50, 100, 200, 1000]
+
+
+function checkInterval(a) {
+  for (var i = 0; i < intervals.length - 1; ++i) {
+    if (typeof range(intervals[i], intervals[i + 1], a) !== 'undefined') {
+      return [intervals[i], intervals[i + 1]] 
+    }
+  } 
+  if (a >= intervals[intervals.length - 1]) {
+    return [intervals[intervals.length - 2], intervals[intervals.length - 1]]
+  }
+}
+
+
 function ProgressBar(props) {
   const classes = useStyles();
-  const achievementsProgress = props.progress < 200 ? props.progress : 200;
-  if (achievementsProgress < 10) {
-    achievementsCap = 10;
-  } else if (achievementsProgress < 25) {
-    achievementsCap = 25;
-  } else if (achievementsProgress < 50) {
-    achievementsCap = 50;
-  } else if (achievementsProgress < 100) {
-    achievementsCap = 100;
-  } else {
-    achievementsCap = 200;
-  }
+  const achievementsProgress = props.progress < intervals[intervals.length - 1] ? props.progress : intervals[intervals.length - 1];
+  achievementsCap = checkInterval(props.progress)[1]
   return (
     <div>
       <StyledLinearProgress
