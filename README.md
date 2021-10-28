@@ -8,9 +8,6 @@
 PIGGYBANK lets kids save their money in an online PiggyBank, while tracking total online savings and seeing their money grow through rewards. As kids find items they want to buy, they can use their bank account to make Parent-approved purchases in online shopping on Amazon.
 
 ## Previews of application:
-
-Full Application can be found at: [GitHub](https://github.com/AbhiJ2706/enghack2021)
-
 **Landing Page:**
 ![Landing Page](https://cdn.discordapp.com/attachments/858409865030008873/858580421389189150/pig_land_moving.gif)
 
