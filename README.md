@@ -1,4 +1,4 @@
-## University of Waterloo Engineering Hackathon Winner 2021 (Enghack 2021)
+# University of Waterloo Engineering Hackathon Winner 2021 (Enghack 2021)
 **View our Devpost hackathon submission here:** https://devpost.com/software/piggy-bank-qulyxt
 
 # **_PiggyBank_**
