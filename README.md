@@ -9,6 +9,25 @@ Welcome to **_PiggyBank_**! Our application encourages kids to save and invest t
 
 The COVID-19 pandemic has doubled e-commerce sales in the last year (Global News). While online purchases have become a norm for the average adult, children are often less trusted by their parents for online shopping. Our application bridges the gap between children's access to secure online shopping, along with encouraging money saving strategies.
 
+## Previews of application:
+
+Full Application can be found at: [GitHub](https://github.com/AbhiJ2706/enghack2021)
+
+**Landing Page:**
+![Landing Page](https://cdn.discordapp.com/attachments/858409865030008873/858580421389189150/pig_land_moving.gif)
+
+**Sample User Interface Interaction:**
+![User Interface](https://cdn.discordapp.com/attachments/858409865030008873/858604300991987742/pig_official_dashboard.gif)
+
+**Browsing Marketplace:**
+![Browsing Marketplace](https://media.discordapp.net/attachments/858409865030008873/858605468566028319/pig_official_marketplace.gif)
+
+**Full Login and Sign Up System:**
+![Login Page](https://media.discordapp.net/attachments/858409865030008873/858576812932857856/unknown.png?width=1163&height=676)
+
+**Email for Parent Confirmation of buying product:**
+![Email Confirmation](https://cdn.discordapp.com/attachments/855857645260767265/858591978476666892/unknown.png)
+
 ## What it does
 
 PIGGYBANK lets kids save their money in an online PiggyBank, while tracking total online savings and seeing their money grow through rewards. As kids find items they want to buy, they can use their bank account to make Parent-approved purchases in online shopping on Amazon.
@@ -42,25 +61,6 @@ The application has a **full login account system** for kids to log in and start
 - Amazon links of kid's preferred products are converted to **affiliate links** for our business growth and revenue (i.e. generate money for our business).
 - Amazon links automatically add items to cart easily for purchase.
 - Robust app platform that simulates a real-world product application.
-
-## Previews of application:
-
-Full Application can be found at: [GitHub](https://github.com/AbhiJ2706/enghack2021)
-
-**Landing Page:**
-![Landing Page](https://cdn.discordapp.com/attachments/858409865030008873/858580421389189150/pig_land_moving.gif)
-
-**Sample User Interface Interaction:**
-![User Interface](https://cdn.discordapp.com/attachments/858409865030008873/858604300991987742/pig_official_dashboard.gif)
-
-**Browsing Marketplace:**
-![Browsing Marketplace](https://media.discordapp.net/attachments/858409865030008873/858605468566028319/pig_official_marketplace.gif)
-
-**Full Login and Sign Up System:**
-![Login Page](https://media.discordapp.net/attachments/858409865030008873/858576812932857856/unknown.png?width=1163&height=676)
-
-**Email for Parent Confirmation of buying product:**
-![Email Confirmation](https://cdn.discordapp.com/attachments/855857645260767265/858591978476666892/unknown.png)
 
 ## How we built it
 
