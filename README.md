@@ -3,11 +3,9 @@
 
 # **_PiggyBank_**
 
-## Inspiration
+## Brief Overview of application
 
-Welcome to **_PiggyBank_**! Our application encourages kids to save and invest their money, while securely buying their favourite toys straight from home, with secure Parental approval for each purchase.
-
-The COVID-19 pandemic has doubled e-commerce sales in the last year (Global News). While online purchases have become a norm for the average adult, children are often less trusted by their parents for online shopping. Our application bridges the gap between children's access to secure online shopping, along with encouraging money saving strategies.
+PIGGYBANK lets kids save their money in an online PiggyBank, while tracking total online savings and seeing their money grow through rewards. As kids find items they want to buy, they can use their bank account to make Parent-approved purchases in online shopping on Amazon.
 
 ## Previews of application:
 
@@ -28,9 +26,11 @@ Full Application can be found at: [GitHub](https://github.com/AbhiJ2706/enghack2
 **Email for Parent Confirmation of buying product:**
 ![Email Confirmation](https://cdn.discordapp.com/attachments/855857645260767265/858591978476666892/unknown.png)
 
-## What it does
+## Inspiration
 
-PIGGYBANK lets kids save their money in an online PiggyBank, while tracking total online savings and seeing their money grow through rewards. As kids find items they want to buy, they can use their bank account to make Parent-approved purchases in online shopping on Amazon.
+Welcome to **_PiggyBank_**! Our application encourages kids to save and invest their money, while securely buying their favourite toys straight from home, with secure Parental approval for each purchase.
+
+The COVID-19 pandemic has doubled e-commerce sales in the last year (Global News). While online purchases have become a norm for the average adult, children are often less trusted by their parents for online shopping. Our application bridges the gap between children's access to secure online shopping, along with encouraging money saving strategies.
 
 PIGGYBANK is a no-risk bank- no money leaves a parent's hand unless they approve.
 
